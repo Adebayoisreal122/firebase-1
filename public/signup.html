@@ -58,7 +58,7 @@
             let fullname = document.getElementById("fullName").value
             let email = document.getElementById("userEmail").value
             let password = document.getElementById("userPass").value
-            createUserWithEmailAndPassword(auth, email, password)
+            createUserWithEmailAndPassword(auth, email, password, fullname)
                 .then((userCredential) => {
                     // Signed up 
                     const user = userCredential.user;

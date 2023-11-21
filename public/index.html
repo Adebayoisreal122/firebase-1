@@ -16,6 +16,7 @@
 
       <form class="form">
         <p class="form-title">Sign in to your account</p>
+        <div id="show"></div>
         <div class="input-container w-75 border boder-2 rounded rounded-4 my-4">
           <input id="userEmail" placeholder="Enter email" type="email">
           <span>
@@ -47,10 +48,9 @@
           ">Sign up</a>
         </p>
       </form>
-      <button class="form-control m-auto btn btn-success w-75" onclick="signI()">Sign in</button>
+      <button class="form-control m-auto btn btn-success my-2 w-75" onclick="signI()">Sign in</button>
       <button class="form-control m-auto btn btn-primary w-75" onclick="signG()">Sign in with Google</button>
       <button class="form-control m-auto btn btn-primary my-2 w-75" onclick="signGit()">Sign in with Github</button>
-      <button onclick="check()">check</button>
     </div>
   </center>
 
@@ -94,17 +94,15 @@
           console.log(error);
         });
     }
-    
-    const check = () => {
-      console.log("am working");
-
-}
 const signI = () => {
   // console.log("am working");
   let email = document.getElementById("userEmail").value
   let password = document.getElementById("userPassword").value
   signInWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
+    if (email =="" && password == "") {
+      show.innerHTML = `<p> Please Enter your email and password</p>`
+    }xx
     // Signed in 
     const user = userCredential.user;
     if (user) {
