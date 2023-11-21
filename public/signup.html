@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="signup.css">
+</head>
+
+<body>
+    <center>
+        <div class="form-box container my-5 w-50 rounded rounded-4">
+            <form class="form">
+                <span class="title">Sign up</span>
+                <span class="subtitle">Create a free account with your email.</span>
+                <div class="form-container">
+                    <input type="text" class="input" id="fullName" placeholder="Full Name">
+                    <input type="email" class="input" id="userEmail" placeholder="Email">
+                    <input type="password" class="input" id="userPass" placeholder="Password">
+                </div>
+            </form>
+            <button onclick="signU()">Sign up</button>
+            <div class="form-section">
+                <p>Have an account? <a href="index.html">Sign in</a> </p>
+            </div>
+        </div>
+    </center>
+
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBXwEPrJk6aVzNOCZeFtSU03nDkn87JYNM",
+            authDomain: "project-1-584a3.firebaseapp.com",
+            projectId: "project-1-584a3",
+            storageBucket: "project-1-584a3.appspot.com",
+            messagingSenderId: "920820379477",
+            appId: "1:920820379477:web:10f6557197f9eeb9f209dc",
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth();
+        const signU = () => {
+            console.log("i am here");
+            let fullname = document.getElementById("fullName").value
+            let email = document.getElementById("userEmail").value
+            let password = document.getElementById("userPass").value
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    // Signed up 
+                    const user = userCredential.user;
+                    console.log(user);
+                    if (email == user.email) {
+                        window.location.href = "index.html"
+                    }
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    console.log(error);
+                });
+                document.getElementById("fullName").value = ""
+                document.getElementById("userEmail").value = ""
+                document.getElementById("userPass").value = ""
+
+        }
+        window.signU = signU;
+    </script>
+</body>
+
+</html>
