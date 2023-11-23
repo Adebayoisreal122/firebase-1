@@ -27,7 +27,7 @@
     <div class="col-lg-6 mx-auto mt-lg-5 shadow-sm p-4">
         <input class="form-control" type="text" id="movieName" placeholder="Enter movie name">
         <input class="form-control" type="text" id="movieDesc" placeholder="Enter the description">
-        <button class="btn btn-info w-50 mx-auto" onclick="add()">Add</button>
+        <button class="btn btn-info w-50 mx-auto" onclick="addIng()">Add your details</button>
     </div>
     <div id="out"></div>
     <script type="module">
@@ -54,6 +54,7 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const database = getDatabase(app);
+        let indexa = 0 
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 console.log(user);
@@ -76,8 +77,7 @@
                     console.log(error);
                 });
         };
-        let allItems = []
-        const add = () => {
+        const addIng = () => {
             let date = new Date().toLocaleDateString()
             let time = new Date(). toLocaleTimeString()
             onAuthStateChanged(auth, (user) => {
@@ -89,22 +89,28 @@
                     date, time
                 }
                 console.log(allItems);
-                let dataR = ref(database, "details")
+                let dataR = ref(database, `details/${indexa}`)
                 set(dataR, allItems)
                 onValue(dataR, (snapshot) => {
                 const data = snapshot.val();
                 console.log(data);
-                allItems.map((tod, ind) => {
-                    out.innerHTML = `<p>${tod.nami} </p>
-                    <p>${tod.desc}</p>`
-                })
+                indexa = Object.keys(data).length;
+                if (data) {
+                    const arrayOfItems = Object.values(data)
+                    indexa = arrayOfItems.length
+                arrayOfItems.map((detal, ind) => { out.innerHTML=
+                        `<center>
+                        <p>${detal.nami}</p>
+                        <p>${detal.desc}</p>
+                        </center>`
+                    })
+                }
 
             });
         });
-        }
-        let data = ref(database, "details")
+    }
+        window.addIng = addIng
         window.signe = signe;
-        window.add = add
     </script>
 </body>
 
