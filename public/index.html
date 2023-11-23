@@ -100,9 +100,6 @@ const signI = () => {
   let password = document.getElementById("userPassword").value
   signInWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
-    if (email =="" && password == "") {
-      show.innerHTML = `<p> Please Enter your email and password</p>`
-    }xx
     // Signed in 
     const user = userCredential.user;
     if (user) {

@@ -29,12 +29,13 @@
         <input class="form-control" type="text" id="movieDesc" placeholder="Enter the description">
         <button class="btn btn-info w-50 mx-auto" onclick="add()">Add</button>
     </div>
+    <div id="out"></div>
     <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
         import {getAuth, onAuthStateChanged, signOut,
         } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
-        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js";
+        import { getDatabase, ref,  onValue, set } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js";
         // TODO: Add SDKs for Firebase products that you want to use
         // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -75,6 +76,7 @@
                     console.log(error);
                 });
         };
+        let allItems = []
         const add = () => {
             let date = new Date().toLocaleDateString()
             let time = new Date(). toLocaleTimeString()
@@ -87,10 +89,20 @@
                     date, time
                 }
                 console.log(allItems);
-                let data = ref(database, "details")
-                set(data, allItems)
+                let dataR = ref(database, "details")
+                set(dataR, allItems)
+                onValue(dataR, (snapshot) => {
+                const data = snapshot.val();
+                console.log(data);
+                allItems.map((tod, ind) => {
+                    out.innerHTML = `<p>${tod.nami} </p>
+                    <p>${tod.desc}</p>`
+                })
+
+            });
         });
         }
+        let data = ref(database, "details")
         window.signe = signe;
         window.add = add
     </script>
