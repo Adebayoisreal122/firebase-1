@@ -78,91 +78,87 @@
                     console.log(error);
                 });
         };
-        //     const addIng = () => {
-        //         let date = new Date().toLocaleDateString()
-        //         let time = new Date(). toLocaleTimeString()
-        // onAuthStateChanged(auth, (user) => {
-        //     let userNam = user.displayName
-        //     let allItems = {
-        //         nami: movieName.value,
-        //         desc: movieDesc.value,
-        //         userNam, 
-        //         date, time
+        //         const addIng = () => {
+        //     let date = new Date().toLocaleDateString();
+        //     let time = new Date().toLocaleTimeString();
+
+        //     onAuthStateChanged(auth, (user) => {
+        //         let userNam = user.displayName;
+        //         let allItems = {
+        //             nami: movieName.value,
+        //             desc: movieDesc.value,
+        //             userNam,
+        //             date,
+        //             time
+        //         };
+        //         writeUserData(allItems);
+        //         console.log(allItems);
+        //     })};
+        //     function writeUserData(allItems) {
+        //         const db = getDatabase();
+        //         set(ref(db, `users/${indexa} `), allItems);
         //     }
-        //             console.log(allItems);
-        //             let dataR = ref(database, `details/${indexa}`)
-        //             set(dataR, allItems)
-        //             onValue(dataR, (snapshot) => {
-        //             const data = snapshot.val();
-        //             console.log(data);
-        //             indexa = Object.keys(data).length;
-        //             if (data) {
-        //                 const arrayOfItems = Object.values(data)
-        //                 indexa = arrayOfItems.length
-        //             arrayOfItems.map((detal, ind) => { out.innerHTML=
-        //                     `<center>
-        //                     <p>${detal.nami}</p>
-        //                     <p>${detal.desc}</p>
-        //                     </center>`
-        //                 })
-        //             }
+        //     function updateDisplay(data) {
+        //         // Select the displayDiv
+        //         const out = document.getElementById('out');
 
-        //         });
-        //     });
-        // }
-        //      const addIng = () => {
-        //         // console.log("am working");
-        //             let date = new Date().toLocaleDateString()
-        //             let time = new Date(). toLocaleTimeString()
-        //                     onAuthStateChanged(auth, (user) => {
-        //                 let userNam = user.displayName
-        //                 let allItems = {
-        //                     nami: movieName.value,
-        //                     desc: movieDesc.value,
-        //                     userNam, 
-        //                     date, time
-        //                 }
+        //         // Create a string with the data you want to display
+        //         const displayText = `
+        //     <p>Name: ${data.nami}</p>
+        //     <p>Description: ${data.desc}</p>
+        //     <p>User: ${data.userNam}</p>
+        //     <p>Date: ${data.date}</p>
+        //     <p>Time: ${data.time}</p>
+        // `
+        //         // Update the content of the displayDiv
+        //         out.innerHTML = displayText;
+        //     }
 
-        //             })
-        //         function writeUserData(allItems) {
-        //   const db = getDatabase();
-        //   set(ref(db, `users/${indexa}`), {
-        // // console.log(db);
-        //   });
-        // }
-        // console.log(allItems);
+        //     const db = getDatabase();
+        //     // Assuming indexa is defined somewhere in your code
+        //     const userRef = ref(db, `users/${indexa}`);
+
+        //     // Use onValue to listen for changes in the database
+        //     onValue(userRef, (snapshot) => {
+        //         const dataFromDatabase = snapshot.val();
+        //         if (dataFromDatabase) {
+        //             // Update the displayDiv with the new data
+        //             updateDisplay(dataFromDatabase);
         //         }
+        //     });
         const addIng = () => {
-            let date = new Date().toLocaleDateString();
-            let time = new Date().toLocaleTimeString();
+    let date = new Date().toLocaleDateString();
+    let time = new Date().toLocaleTimeString();
 
-            onAuthStateChanged(auth, (user) => {
-                let userNam = user.displayName;
-                let allItems = {
-                    nami: movieName.value,
-                    desc: movieDesc.value,
-                    userNam,
-                    date,
-                    time
-                };
+    onAuthStateChanged(auth, (user) => {
+        let userNam = user.displayName;
+        let allItems = {
+            nami: movieName.value,
+            desc: movieDesc.value,
+            userNam,
+            date,
+            time
+        };
 
-                // Call the writeUserData function with the allItems parameter
-                writeUserData(allItems);
+        // Call the writeUserData function with the allItems parameter
+        writeUserData(allItems);
 
-                // Move the console.log statement inside the writeUserData function
-                console.log(allItems);
-            });
+        // Update the displayDiv with the data
+        updateDisplay(allItems);
+    });
 
-            function writeUserData(allItems) {
-                const db = getDatabase();
-                set(ref(db, `users/${indexa} `), allItems);
-            }
-            function updateDisplay(data) {
-                // Select the displayDiv
-                const out = document.getElementById('out');
+    function writeUserData(allItems) {
+        const db = getDatabase();
+        // Assuming indexa is defined somewhere in your code
+        set(ref(db, `users/${indexa}`), allItems);
+    }
 
-                // Create a string with the data you want to display
-                const displayText = `
+    function updateDisplay(data) {
+        // Select the displayDiv
+        const out = document.getElementById('out');
+
+        // Create a string with the data you want to display
+        const displayText = `
             <p>Name: ${data.nami}</p>
             <p>Description: ${data.desc}</p>
             <p>User: ${data.userNam}</p>
@@ -170,23 +166,23 @@
             <p>Time: ${data.time}</p>
         `;
 
-                // Update the content of the displayDiv
-                out.innerHTML = displayText;
-            }
+        // Update the content of the displayDiv
+        out.innerHTML = displayText;
+    }
 
-            const db = getDatabase();
-            // Assuming indexa is defined somewhere in your code
-            const userRef = ref(db, `users/${indexa}`);
+    const db = getDatabase();
+    // Assuming indexa is defined somewhere in your code
+    const userRef = ref(db, `users/${indexa}`);
 
-            // Use onValue to listen for changes in the database
-            onValue(userRef, (snapshot) => {
-                const dataFromDatabase = snapshot.val();
-                if (dataFromDatabase) {
-                    // Update the displayDiv with the new data
-                    updateDisplay(dataFromDatabase);
-                }
-            });
-        };
+    // Use onValue to listen for changes in the database
+    onValue(userRef, (snapshot) => {
+        const dataFromDatabase = snapshot.val();
+        if (dataFromDatabase) {
+            // Update the displayDiv with the new data
+            updateDisplay(dataFromDatabase);
+        }
+    });
+};
 
         window.addIng = addIng
         window.signe = signe;
