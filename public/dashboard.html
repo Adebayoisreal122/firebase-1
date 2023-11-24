@@ -33,9 +33,10 @@
     <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
-        import {getAuth, onAuthStateChanged, signOut,
+        import {
+            getAuth, onAuthStateChanged, signOut,
         } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
-        import { getDatabase, ref,  onValue, set } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js";
+        import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js";
         // TODO: Add SDKs for Firebase products that you want to use
         // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -77,94 +78,91 @@
                     console.log(error);
                 });
         };
-    //     const addIng = () => {
-    //         let date = new Date().toLocaleDateString()
-    //         let time = new Date(). toLocaleTimeString()
-            // onAuthStateChanged(auth, (user) => {
-            //     let userNam = user.displayName
-            //     let allItems = {
-            //         nami: movieName.value,
-            //         desc: movieDesc.value,
-            //         userNam, 
-            //         date, time
-            //     }
-    //             console.log(allItems);
-    //             let dataR = ref(database, `details/${indexa}`)
-    //             set(dataR, allItems)
-    //             onValue(dataR, (snapshot) => {
-    //             const data = snapshot.val();
-    //             console.log(data);
-    //             indexa = Object.keys(data).length;
-    //             if (data) {
-    //                 const arrayOfItems = Object.values(data)
-    //                 indexa = arrayOfItems.length
-    //             arrayOfItems.map((detal, ind) => { out.innerHTML=
-    //                     `<center>
-    //                     <p>${detal.nami}</p>
-    //                     <p>${detal.desc}</p>
-    //                     </center>`
-    //                 })
-    //             }
+        //     const addIng = () => {
+        //         let date = new Date().toLocaleDateString()
+        //         let time = new Date(). toLocaleTimeString()
+        // onAuthStateChanged(auth, (user) => {
+        //     let userNam = user.displayName
+        //     let allItems = {
+        //         nami: movieName.value,
+        //         desc: movieDesc.value,
+        //         userNam, 
+        //         date, time
+        //     }
+        //             console.log(allItems);
+        //             let dataR = ref(database, `details/${indexa}`)
+        //             set(dataR, allItems)
+        //             onValue(dataR, (snapshot) => {
+        //             const data = snapshot.val();
+        //             console.log(data);
+        //             indexa = Object.keys(data).length;
+        //             if (data) {
+        //                 const arrayOfItems = Object.values(data)
+        //                 indexa = arrayOfItems.length
+        //             arrayOfItems.map((detal, ind) => { out.innerHTML=
+        //                     `<center>
+        //                     <p>${detal.nami}</p>
+        //                     <p>${detal.desc}</p>
+        //                     </center>`
+        //                 })
+        //             }
 
-    //         });
-    //     });
-    // }
-//      const addIng = () => {
-//         // console.log("am working");
-//             let date = new Date().toLocaleDateString()
-//             let time = new Date(). toLocaleTimeString()
-//                     onAuthStateChanged(auth, (user) => {
-//                 let userNam = user.displayName
-//                 let allItems = {
-//                     nami: movieName.value,
-//                     desc: movieDesc.value,
-//                     userNam, 
-//                     date, time
-//                 }
-                
-//             })
-//         function writeUserData(allItems) {
-//   const db = getDatabase();
-//   set(ref(db, `users/${indexa}`), {
-// // console.log(db);
-//   });
-// }
-// console.log(allItems);
-//         }
-const addIng = () => {
-    let date = new Date().toLocaleDateString();
-    let time = new Date().toLocaleTimeString();
+        //         });
+        //     });
+        // }
+        //      const addIng = () => {
+        //         // console.log("am working");
+        //             let date = new Date().toLocaleDateString()
+        //             let time = new Date(). toLocaleTimeString()
+        //                     onAuthStateChanged(auth, (user) => {
+        //                 let userNam = user.displayName
+        //                 let allItems = {
+        //                     nami: movieName.value,
+        //                     desc: movieDesc.value,
+        //                     userNam, 
+        //                     date, time
+        //                 }
 
-    onAuthStateChanged(auth, (user) => {
-        let userNam = user.displayName;
-        let allItems = {
-            nami: movieName.value,
-            desc: movieDesc.value,
-            userNam,
-            date,
-            time
-        };
+        //             })
+        //         function writeUserData(allItems) {
+        //   const db = getDatabase();
+        //   set(ref(db, `users/${indexa}`), {
+        // // console.log(db);
+        //   });
+        // }
+        // console.log(allItems);
+        //         }
+        const addIng = () => {
+            let date = new Date().toLocaleDateString();
+            let time = new Date().toLocaleTimeString();
 
-        // Call the writeUserData function with the allItems parameter
-        writeUserData(allItems);
+            onAuthStateChanged(auth, (user) => {
+                let userNam = user.displayName;
+                let allItems = {
+                    nami: movieName.value,
+                    desc: movieDesc.value,
+                    userNam,
+                    date,
+                    time
+                };
 
-        // Move the console.log statement inside the writeUserData function
-        console.log(allItems);
-    });
+                // Call the writeUserData function with the allItems parameter
+                writeUserData(allItems);
 
-    function writeUserData(allItems) {
-        const db = getDatabase();
-        // Assuming indexa is defined somewhere in your code
-        set(ref(db, `users/${indexa} `), allItems);
-        // const userRef = ref(db, `users/${indexa}`);
-        // update(userRef, allItems);
-    }
-     function updateDisplay(data) {
-        // Select the displayDiv
-        const out = document.getElementById('out');
+                // Move the console.log statement inside the writeUserData function
+                console.log(allItems);
+            });
 
-        // Create a string with the data you want to display
-        const displayText = `
+            function writeUserData(allItems) {
+                const db = getDatabase();
+                set(ref(db, `users/${indexa} `), allItems);
+            }
+            function updateDisplay(data) {
+                // Select the displayDiv
+                const out = document.getElementById('out');
+
+                // Create a string with the data you want to display
+                const displayText = `
             <p>Name: ${data.nami}</p>
             <p>Description: ${data.desc}</p>
             <p>User: ${data.userNam}</p>
@@ -172,23 +170,23 @@ const addIng = () => {
             <p>Time: ${data.time}</p>
         `;
 
-        // Update the content of the displayDiv
-        out.innerHTML = displayText;
-    }
+                // Update the content of the displayDiv
+                out.innerHTML = displayText;
+            }
 
-    const db = getDatabase();
-    // Assuming indexa is defined somewhere in your code
-    const userRef = ref(db, `users/${indexa}`);
+            const db = getDatabase();
+            // Assuming indexa is defined somewhere in your code
+            const userRef = ref(db, `users/${indexa}`);
 
-    // Use onValue to listen for changes in the database
-    onValue(userRef, (snapshot) => {
-        const dataFromDatabase = snapshot.val();
-        if (dataFromDatabase) {
-            // Update the displayDiv with the new data
-            updateDisplay(dataFromDatabase);
-        }
-    });
-};
+            // Use onValue to listen for changes in the database
+            onValue(userRef, (snapshot) => {
+                const dataFromDatabase = snapshot.val();
+                if (dataFromDatabase) {
+                    // Update the displayDiv with the new data
+                    updateDisplay(dataFromDatabase);
+                }
+            });
+        };
 
         window.addIng = addIng
         window.signe = signe;
